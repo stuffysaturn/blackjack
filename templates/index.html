@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/cards.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+    <title>Blackjack</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="info">
+            <h1>Blackjack</h1>
+            <div class="playingCards">
+                <div class="playerCards">
+                    {% for card in dealer %}
+                    <div class="card {{card}}">
+                        <span class="rank">{{card[5:-6].upper()}}</span>
+                        <span class="suit"><br></span>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="text">Dealer running total: {{ dealerRunningTotal }}</div>
+                <div class="playerCards">
+                    {% for card in player %}
+                    <div class="card {{card}}">
+                        <span class="rank">{{card[5:-6].upper()}}<span>
+                                <span class="suit"><br></span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="text">Your running total: {{ runningtotal }}</div>
+            <div class="text">Game status: {{ gameStatus }}</div>
+        </div>
+        <div class="options">
+            <div class="hit">
+                <form action="{{ url_for('hit') }}" method="POST">
+                    <button type="submit">Hit</button>
+                </form>
+            </div>
+            <div class="stand">
+                <form action="{{ url_for('stand') }}">
+                    <button type="submit">Stand</button>
+                </form>
+            </div>
+        </div>
+        <div class="reset">
+            <form action="{{ url_for('clear') }}" method="POST">
+                <button type="submit">Reset</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
